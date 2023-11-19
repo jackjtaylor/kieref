@@ -45,7 +45,8 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
     """
 
     style: str
-    location: str
+    site: str
+    url: str
     accessed: str
     pages: int
 
@@ -56,4 +57,24 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
         :return: The source reference
         :rtype: str
         """
-        return f"{self.creator}, {self.name}. {self.date}, {self.location}, {self.accessed}, {self.pages}."
+        return f"{self.creator}, {self.name}, {self.pages} seiten, in: {self.site} ({self.url}), abgerufen am {self.accessed}."
+
+
+@dataclass
+class RefcauObjectArticle(RefcauObjectGeneric):
+    """
+    This dataclass is an object for creating article source references.
+    """
+
+    publisher: str
+    volume: str
+    pages: int
+
+    def reference(self) -> str:
+        """
+        This method returns a reference based on the article source.
+
+        :return: The source reference
+        :rtype: str
+        """
+        return f"{self.creator}, Art. {self.name}, in: {self.publisher} {self.volume}, {self.date}, {self.pages}."
