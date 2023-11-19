@@ -4,8 +4,8 @@ from typing import override
 
 """
 This file defines the classes used to create references.
-@author Jack Taylor
-@date 19/11/2023
+:author: Jack Taylor
+:date: 19/11/2023
 """
 
 
@@ -17,7 +17,7 @@ class RefcauObjectGeneric(AbstractBaseClass):
 
     name: str
     creator: str
-    date: int
+    date: str
 
     @abstractmethod
     def reference(self) -> str:
@@ -80,4 +80,4 @@ class RefcauObjectArticle(RefcauObjectGeneric):
         :return: The source reference
         :rtype: str
         """
-        return f"{self.creator}, Art. {self.name}, in: {self.publisher} {self.volume}, {self.date}, {self.pages}."
+        return f"{self.creator}, Art. {self.name}, in: {self.publisher} {self.volume}, {self.date}, {self.pages} seiten."
