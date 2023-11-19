@@ -1,5 +1,6 @@
 from abc import ABC as AbstractBaseClass, abstractmethod
 from dataclasses import dataclass
+from typing import override
 
 """
 This file defines the classes used to create references.
@@ -50,6 +51,7 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
     accessed: str
     pages: int
 
+    @override
     def reference(self) -> str:
         """
         This method returns a reference based on the electronic source.
@@ -70,6 +72,7 @@ class RefcauObjectArticle(RefcauObjectGeneric):
     volume: str
     pages: int
 
+    @override
     def reference(self) -> str:
         """
         This method returns a reference based on the article source.
