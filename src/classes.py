@@ -36,3 +36,24 @@ class RefcauObjectGeneric(AbstractBaseClass):
         :rtype: str
         """
         return f"({self.creator}, {self.date})"
+
+
+@dataclass
+class RefcauObjectElectronic(RefcauObjectGeneric):
+    """
+    This dataclass is an object for creating electronic source references.
+    """
+
+    style: str
+    location: str
+    accessed: str
+    pages: int
+
+    def reference(self) -> str:
+        """
+        This method returns a reference based on the electronic source.
+
+        :return: The source reference
+        :rtype: str
+        """
+        return f"{self.creator}, {self.name}. {self.date}, {self.location}, {self.accessed}, {self.pages}."
