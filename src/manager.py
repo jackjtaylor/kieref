@@ -1,5 +1,5 @@
 from shelve import open
-from classes import RefcauObjectArticle, RefcauObjectElectronic
+from classes import RefcauObjectArticle, RefcauObjectElectronic, RefcauObjectGeneric
 
 """
 This file defines the manager to hold references.
@@ -22,19 +22,35 @@ class RefcauManager:
         """
         self.enabled: bool = True
         self.database = database
-        while self.enabled:
-            self.sources()
 
-    def sources(self) -> None:
+    def get_references(self) -> list[RefcauObjectGeneric]:
         """
-        This method lists all sources in the database.
+        This method returns all sources in the database.
         """
         with open(self.database) as database:
-            keys = list(database.keys())
-            keys.sort()
-            for key in keys:
-                print(database.get(key))
+            values = list(database.values())
+            return values
+
+    def add_reference(self, source: RefcauObjectGeneric) -> None:
+        """
+        This method adds a new source to the database.
+
+        :param source: The new source to add
+        :type source: RefcauObjectGeneric
+        """
+        with open(self.database) as database:
+            database[source.uuid] = source
+
+    def delete_reference(self, source: RefcauObjectGeneric) -> None:
+        """
+        This method removes a source from the database.
+
+        :param source: The source to delete
+        :type source: RefcauObjectGeneric
+        """
+        with open(self.database) as database:
+            database.pop(source.uuid)
 
 
 if __name__ == "__main__":
-    RefcauManager("RefcauDatabase")
+    RefcauManager("RefcauDatabase.db")
