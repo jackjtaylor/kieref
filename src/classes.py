@@ -1,5 +1,6 @@
 from abc import ABC as AbstractBaseClass, abstractmethod
 from dataclasses import dataclass
+from uuid import uuid4
 
 """
 This file defines the classes used to create references.
@@ -17,6 +18,7 @@ class RefcauObjectGeneric(AbstractBaseClass):
     title: str
     creator: str
     date: str
+    uuid: str = str(uuid4())
 
     @abstractmethod
     def reference(self) -> str:
