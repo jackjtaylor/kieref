@@ -18,7 +18,13 @@ class RefcauObjectGeneric(AbstractBaseClass):
     title: str
     creator: str
     date: str
-    uuid: str = str(uuid4())
+    uuid: str
+
+    def __init__(self) -> None:
+        """
+        This method initialises this object and creates a UUID.
+        """
+        self.uuid = str(uuid4())
 
     @abstractmethod
     def reference(self) -> str:
