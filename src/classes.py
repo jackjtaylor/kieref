@@ -1,6 +1,5 @@
 from abc import ABC as AbstractBaseClass, abstractmethod
 from dataclasses import dataclass
-from typing import override
 
 """
 This file defines the classes used to create references.
@@ -15,7 +14,7 @@ class RefcauObjectGeneric(AbstractBaseClass):
     This abstract dataclass is a base object for creating references.
     """
 
-    name: str
+    title: str
     creator: str
     date: str
 
@@ -27,7 +26,7 @@ class RefcauObjectGeneric(AbstractBaseClass):
         :return: The source reference
         :rtype: str
         """
-        return f"{self.creator}, {self.name}. {self.date}."
+        return f"{self.creator}, {self.title}. {self.date}."
 
     def cite(self) -> str:
         """
@@ -51,7 +50,6 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
     accessed: str
     pages: int
 
-    @override
     def reference(self) -> str:
         """
         This method returns a reference based on the electronic source.
@@ -59,7 +57,7 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
         :return: The source reference
         :rtype: str
         """
-        return f"{self.creator}, {self.name}, {self.pages} seiten, in: {self.site} ({self.url}), abgerufen am {self.accessed}."
+        return f"{self.creator}, {self.title}, {self.date} in: {self.site} ({self.style} {self.url}), abgerufen am {self.accessed}, {self.pages}."
 
 
 @dataclass
@@ -72,7 +70,6 @@ class RefcauObjectArticle(RefcauObjectGeneric):
     volume: str
     pages: int
 
-    @override
     def reference(self) -> str:
         """
         This method returns a reference based on the article source.
@@ -80,4 +77,4 @@ class RefcauObjectArticle(RefcauObjectGeneric):
         :return: The source reference
         :rtype: str
         """
-        return f"{self.creator}, Art. {self.name}, in: {self.publisher} {self.volume}, {self.date}, {self.pages} seiten."
+        return f"{self.creator}, Art. {self.title}, in: {self.publisher} {self.volume}, {self.date}, {self.pages} seiten."
