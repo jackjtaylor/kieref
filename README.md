@@ -1,4 +1,4 @@
-# Project
+# Kieref
 
 Kieref is a tool for managing sources and creating references and citations.
 
