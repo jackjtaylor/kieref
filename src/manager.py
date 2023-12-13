@@ -1,5 +1,11 @@
+from dataclasses import asdict, fields
 from shelve import open
-from classes import RefcauObjectArticle, RefcauObjectElectronic, RefcauObjectGeneric
+from classes import (
+    KierefObjectArticle,
+    KierefObjectElectronic,
+    KierefObjectGeneric,
+    KierefObjectType,
+)
 
 """
 This file defines the manager to hold references.
@@ -8,7 +14,7 @@ This file defines the manager to hold references.
 """
 
 
-class RefcauManager:
+class KierefManager:
     """
     This class is an object for managing references.
     """
@@ -23,7 +29,16 @@ class RefcauManager:
         self.enabled: bool = True
         self.database = database
 
-    def get_references(self) -> list[RefcauObjectGeneric]:
+    def print_references(self) -> None:
+        """
+        This method prints all references in the database.
+        """
+        references = self.get_references()
+        print(f"There are currently {len(references)} references in the database.")
+        for source in references:
+            print(source)
+
+    def get_references(self) -> list[KierefObjectGeneric]:
         """
         This method returns all sources in the database.
         """
@@ -31,26 +46,37 @@ class RefcauManager:
             values = list(database.values())
             return values
 
-    def add_reference(self, source: RefcauObjectGeneric) -> None:
+    def add_reference(self, source: KierefObjectGeneric) -> None:
         """
         This method adds a new source to the database.
 
         :param source: The new source to add
-        :type source: RefcauObjectGeneric
+        :type source: KierefObjectGeneric
         """
         with open(self.database) as database:
             database[source.uuid] = source
 
-    def delete_reference(self, source: RefcauObjectGeneric) -> None:
+    def delete_reference(self, source: KierefObjectGeneric) -> None:
         """
         This method removes a source from the database.
 
         :param source: The source to delete
-        :type source: RefcauObjectGeneric
+        :type source: KierefObjectGeneric
         """
         with open(self.database) as database:
             database.pop(source.uuid)
 
+    def create_reference(self, type: type[KierefObjectType]) -> None:
+        """
+        This method creates a reference object by asking for input.
+
+        :param type: The type of reference to create
+        :type type: type[KierefObjectType]
+        :return: The created reference object
+        :rtype: KierefObjectType
+        """
+        pass
+
 
 if __name__ == "__main__":
-    RefcauManager("RefcauDatabase.db")
+    KierefManager("KierefDatabase.db").print_references()

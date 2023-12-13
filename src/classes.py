@@ -10,13 +10,13 @@ This file defines the classes used to create references.
 """
 
 """
-This TypeVar defines a generic type for RefcauObjects.
+This TypeVar defines a generic type for KierefObjects.
 """
-RefcauObjectType = TypeVar("RefcauObjectType")
+KierefObjectType = TypeVar("KierefObjectType")
 
 
 @dataclass
-class RefcauObjectGeneric(AbstractBaseClass):
+class KierefObjectGeneric(AbstractBaseClass):
     """
     This abstract dataclass is a base object for creating references.
     """
@@ -62,7 +62,7 @@ class RefcauObjectGeneric(AbstractBaseClass):
 
 
 @dataclass
-class RefcauObjectElectronic(RefcauObjectGeneric):
+class KierefObjectElectronic(KierefObjectGeneric):
     """
     This dataclass is an object for creating electronic source references.
     """
@@ -84,7 +84,7 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
 
 
 @dataclass
-class RefcauObjectArticle(RefcauObjectGeneric):
+class KierefObjectArticle(KierefObjectGeneric):
     """
     This dataclass is an object for creating article source references.
     """
