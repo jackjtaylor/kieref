@@ -1,12 +1,18 @@
 from abc import ABC as AbstractBaseClass, abstractmethod
 from dataclasses import dataclass
 from uuid import uuid4
+from typing import TypeVar
 
 """
 This file defines the classes used to create references.
 :author: Jack Taylor
 :date: 19/11/2023
 """
+
+"""
+This TypeVar defines a generic type for RefcauObjects.
+"""
+RefcauObjectType = TypeVar("RefcauObjectType")
 
 
 @dataclass
@@ -45,6 +51,15 @@ class RefcauObjectGeneric(AbstractBaseClass):
         """
         return f"({self.creator}, {self.date})"
 
+    def __repr__(self) -> str:
+        """
+        This method uses the object's reference() method to print its data.
+
+        :return: The reference of the object
+        :rtype: str
+        """
+        return self.reference()
+
 
 @dataclass
 class RefcauObjectElectronic(RefcauObjectGeneric):
@@ -56,7 +71,7 @@ class RefcauObjectElectronic(RefcauObjectGeneric):
     site: str
     url: str
     accessed: str
-    pages: int
+    pages: str
 
     def reference(self) -> str:
         """
@@ -76,7 +91,7 @@ class RefcauObjectArticle(RefcauObjectGeneric):
 
     publisher: str
     volume: str
-    pages: int
+    pages: str
 
     def reference(self) -> str:
         """
