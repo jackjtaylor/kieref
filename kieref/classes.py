@@ -1,17 +1,16 @@
-from abc import ABC as AbstractBaseClass, abstractmethod
-from dataclasses import dataclass
-from uuid import uuid4
-from typing import TypeVar
-
 """
 This file defines the classes used to create references.
 :author: Jack Taylor
 :date: 19/11/2023
 """
 
-"""
-This TypeVar defines a generic type for KierefObjects.
-"""
+from abc import ABC as AbstractBaseClass, abstractmethod
+from dataclasses import dataclass
+from uuid import uuid4
+from typing import TypeVar
+
+
+# This TypeVar defines a generic type for KierefObjects.
 KierefObjectType = TypeVar("KierefObjectType")
 
 
@@ -80,6 +79,7 @@ class KierefObjectElectronic(KierefObjectGeneric):
         :return: The source reference
         :rtype: str
         """
+        # noinspection SpellCheckingInspection
         return f"{self.creator}, {self.title}, {self.date} in: {self.site} ({self.style} {self.url}), abgerufen am {self.accessed}, {self.pages}."
 
 
@@ -100,4 +100,5 @@ class KierefObjectArticle(KierefObjectGeneric):
         :return: The source reference
         :rtype: str
         """
+        # noinspection SpellCheckingInspection
         return f"{self.creator}, Art. {self.title}, in: {self.publisher} {self.volume}, {self.date}, {self.pages} seiten."

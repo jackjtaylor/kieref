@@ -1,17 +1,14 @@
-from dataclasses import asdict, fields
-from shelve import open
-from classes import (
-    KierefObjectArticle,
-    KierefObjectElectronic,
-    KierefObjectGeneric,
-    KierefObjectType,
-)
-
 """
 This file defines the manager to hold references.
 :author: Jack Taylor
 :date: 19/11/2023
 """
+
+from shelve import open
+from classes import (
+    KierefObjectGeneric,
+    KierefObjectType,
+)
 
 
 class KierefManager:
@@ -66,12 +63,12 @@ class KierefManager:
         with open(self.database) as database:
             database.pop(source.uuid)
 
-    def create_reference(self, type: type[KierefObjectType]) -> None:
+    def create_reference(self, reference_type: type[KierefObjectType]) -> None:
         """
         This method creates a reference object by asking for input.
 
-        :param type: The type of reference to create
-        :type type: type[KierefObjectType]
+        :param reference_type: The type of reference to create
+        :type reference_type: type[KierefObjectType]
         :return: The created reference object
         :rtype: KierefObjectType
         """
