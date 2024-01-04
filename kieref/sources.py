@@ -14,7 +14,7 @@ KierefObjectType = TypeVar("KierefObjectType")
 
 
 @dataclass
-class KierefObjectGeneric(AbstractBaseClass):
+class KierefSourceGeneric(AbstractBaseClass):
     """
     This abstract dataclass is a base object for creating references.
     """
@@ -60,7 +60,7 @@ class KierefObjectGeneric(AbstractBaseClass):
 
 
 @dataclass
-class KierefObjectElectronic(KierefObjectGeneric):
+class KierefSourceElectronic(KierefSourceGeneric):
     """
     This dataclass is an object for creating electronic source references.
     """
@@ -79,11 +79,15 @@ class KierefObjectElectronic(KierefObjectGeneric):
         :rtype: str
         """
         # noinspection SpellCheckingInspection
-        return f"{self.creator}, {self.title}, {self.date} in: {self.site} ({self.style} {self.url}), abgerufen am {self.accessed}, {self.pages}."
+        return (
+            f"{self.creator}, {self.title}, {self.date} in: {self.site} ("
+            f"{self.style} {self.url}), abgerufen am {self.accessed}, "
+            f"{self.pages}."
+        )
 
 
 @dataclass
-class KierefObjectArticle(KierefObjectGeneric):
+class KierefSourceArticle(KierefSourceGeneric):
     """
     This dataclass is an object for creating article source references.
     """
@@ -99,5 +103,7 @@ class KierefObjectArticle(KierefObjectGeneric):
         :return: The source reference
         :rtype: str
         """
-        # noinspection SpellCheckingInspection
-        return f"{self.creator}, Art. {self.title}, in: {self.publisher} {self.volume}, {self.date}, {self.pages} seiten."
+        return (
+            f"{self.creator}, Art. {self.title}, in: {self.publisher} "
+            f"{self.volume}, {self.date}, {self.pages} seiten."
+        )

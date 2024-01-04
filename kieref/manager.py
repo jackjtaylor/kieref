@@ -3,8 +3,8 @@ This module defines the manager to hold references.
 """
 
 from shelve import open
-from classes import (
-    KierefObjectGeneric,
+from sources import (
+    KierefSourceGeneric,
     KierefObjectType,
 )
 
@@ -32,11 +32,11 @@ class KierefManager:
         This method prints all references in the database.
         """
         references = self.get_references()
-        print(f"There are currently {len(references)} references in the database.")
+        print(f"References: {len(references)}")
         for source in references:
             print(source)
 
-    def get_references(self) -> list[KierefObjectGeneric]:
+    def get_references(self) -> list[KierefSourceGeneric]:
         """
         This method returns all sources in the database.
         """
@@ -44,22 +44,22 @@ class KierefManager:
             values = list(database.values())
             return values
 
-    def add_reference(self, source: KierefObjectGeneric) -> None:
+    def add_reference(self, source: KierefSourceGeneric) -> None:
         """
         This method adds a new source to the database.
 
         :param source: The new source to add
-        :type source: KierefObjectGeneric
+        :type source: KierefSourceGeneric
         """
         with open(self.database) as database:
             database[source.uuid] = source
 
-    def delete_reference(self, source: KierefObjectGeneric) -> None:
+    def delete_reference(self, source: KierefSourceGeneric) -> None:
         """
         This method removes a source from the database.
 
         :param source: The source to delete
-        :type source: KierefObjectGeneric
+        :type source: KierefSourceGeneric
         """
         with open(self.database) as database:
             database.pop(source.uuid)
@@ -74,7 +74,3 @@ class KierefManager:
         :rtype: KierefObjectType
         """
         pass
-
-
-if __name__ == "__main__":
-    KierefManager("KierefDatabase.data").print_references()
