@@ -1,7 +1,5 @@
 """
-This file defines the classes used to create references.
-:author: Jack Taylor
-:date: 19/11/2023
+This module defines the classes used to create references.
 """
 
 from abc import ABC as AbstractBaseClass, abstractmethod
@@ -9,8 +7,9 @@ from dataclasses import dataclass
 from uuid import uuid4
 from typing import TypeVar
 
+__date__ = "19/11/2023"
+__author__ = "Jack Taylor"
 
-# This TypeVar defines a generic type for KierefObjects.
 KierefObjectType = TypeVar("KierefObjectType")
 
 

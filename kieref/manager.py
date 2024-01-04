@@ -1,7 +1,5 @@
 """
-This file defines the manager to hold references.
-:author: Jack Taylor
-:date: 19/11/2023
+This module defines the manager to hold references.
 """
 
 from shelve import open
@@ -9,6 +7,9 @@ from classes import (
     KierefObjectGeneric,
     KierefObjectType,
 )
+
+__date__ = "19/11/2023"
+__author__ = "Jack Taylor"
 
 
 class KierefManager:
@@ -76,4 +77,4 @@ class KierefManager:
 
 
 if __name__ == "__main__":
-    KierefManager("KierefDatabase.db").print_references()
+    KierefManager("KierefDatabase.data").print_references()
