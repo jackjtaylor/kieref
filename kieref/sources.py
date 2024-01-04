@@ -4,17 +4,18 @@ This module defines the classes used to create sources.
 
 from abc import ABC as AbstractBaseClass, abstractmethod
 from dataclasses import dataclass
-from uuid import uuid4
 from typing import TypeVar
+from uuid import uuid4
 
 __date__ = "19/11/2023"
 __author__ = "Jack Taylor"
 
-KierefSourceType = TypeVar("KierefSourceType")
+
+KierefSourceType = TypeVar("KierefSourceType", bound="KierefSourceGeneric")
 
 
 @dataclass
-class KierefSourceGeneric(AbstractBaseClass):
+class KierefSourceAbstract(AbstractBaseClass):
     """
     This abstract dataclass is a base object for creating sources.
     """
@@ -60,7 +61,7 @@ class KierefSourceGeneric(AbstractBaseClass):
 
 
 @dataclass
-class KierefSourceElectronic(KierefSourceGeneric):
+class KierefSourceElectronic(KierefSourceAbstract):
     """
     This dataclass is an object for creating electronic sources.
     """
@@ -80,13 +81,13 @@ class KierefSourceElectronic(KierefSourceGeneric):
         """
         return (
             f"{self.creator}, {self.title}, {self.date} in: {self.site} ("
-            f"{self.style} {self.url}), abgerufen am {self.accessed}, "
+            f"{self.style} {self.url}), accessed on {self.accessed}, "
             f"{self.pages}."
         )
 
 
 @dataclass
-class KierefSourceArticle(KierefSourceGeneric):
+class KierefSourceArticle(KierefSourceAbstract):
     """
     This dataclass is an object for creating article sources.
     """
@@ -103,6 +104,6 @@ class KierefSourceArticle(KierefSourceGeneric):
         :rtype: str
         """
         return (
-            f"{self.creator}, Art. {self.title}, in: {self.publisher} "
-            f"{self.volume}, {self.date}, {self.pages} seiten."
+            f"{self.creator}, article. {self.title}, in: {self.publisher} "
+            f"{self.volume}, {self.date}, {self.pages} pages."
         )

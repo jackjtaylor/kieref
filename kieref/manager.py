@@ -4,7 +4,7 @@ This module defines the manager to hold sources.
 
 from shelve import open
 from sources import (
-    KierefSourceGeneric,
+    KierefSourceAbstract,
     KierefSourceType,
 )
 
@@ -36,7 +36,7 @@ class KierefManager:
         for source in references:
             print(source)
 
-    def get_references(self) -> list[KierefSourceGeneric]:
+    def get_references(self) -> list[KierefSourceAbstract]:
         """
         This method returns all sources in the database.
         """
@@ -44,22 +44,22 @@ class KierefManager:
             values = list(database.values())
             return values
 
-    def add_reference(self, source: KierefSourceGeneric) -> None:
+    def add_reference(self, source: KierefSourceAbstract) -> None:
         """
         This method adds a new source to the database.
 
         :param source: The new source to add
-        :type source: KierefSourceGeneric
+        :type source: KierefSourceAbstract
         """
         with open(self.database) as database:
             database[source.id] = source
 
-    def delete_reference(self, source: KierefSourceGeneric) -> None:
+    def delete_reference(self, source: KierefSourceAbstract) -> None:
         """
         This method removes a source from the database.
 
         :param source: The source to delete
-        :type source: KierefSourceGeneric
+        :type source: KierefSourceAbstract
         """
         with open(self.database) as database:
             database.pop(source.id)
