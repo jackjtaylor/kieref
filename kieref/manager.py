@@ -1,11 +1,11 @@
 """
-This module defines the manager to hold references.
+This module defines the manager to hold sources.
 """
 
 from shelve import open
 from sources import (
     KierefSourceGeneric,
-    KierefObjectType,
+    KierefSourceType,
 )
 
 __date__ = "19/11/2023"
@@ -14,12 +14,12 @@ __author__ = "Jack Taylor"
 
 class KierefManager:
     """
-    This class is an object for managing references.
+    This class is an object for managing sources.
     """
 
     def __init__(self, database: str) -> None:
         """
-        This method initialises this object and enables the object.
+        This method initialises this manager and enables it by default.
 
         :param database: The database path
         :type database: str
@@ -29,10 +29,10 @@ class KierefManager:
 
     def print_references(self) -> None:
         """
-        This method prints all references in the database.
+        This method prints all sources in the database.
         """
         references = self.get_references()
-        print(f"References: {len(references)}")
+        print(f"Sources: {len(references)}")
         for source in references:
             print(source)
 
@@ -52,7 +52,7 @@ class KierefManager:
         :type source: KierefSourceGeneric
         """
         with open(self.database) as database:
-            database[source.uuid] = source
+            database[source.id] = source
 
     def delete_reference(self, source: KierefSourceGeneric) -> None:
         """
@@ -62,15 +62,18 @@ class KierefManager:
         :type source: KierefSourceGeneric
         """
         with open(self.database) as database:
-            database.pop(source.uuid)
+            database.pop(source.id)
 
-    def create_reference(self, reference_type: type[KierefObjectType]) -> None:
+    def create_reference(self, reference_type: type[KierefSourceType]) -> None:
         """
-        This method creates a reference object by asking for input.
+        This method creates a source object based on the 'reference_type'
+        parameter.
 
         :param reference_type: The type of reference to create
         :type reference_type: type[KierefObjectType]
         :return: The created reference object
         :rtype: KierefObjectType
         """
-        pass
+        new_reference = reference_type()
+        self.add_reference(new_reference)
+        return new_reference

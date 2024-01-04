@@ -1,5 +1,5 @@
 """
-This module defines the classes used to create references.
+This module defines the classes used to create sources.
 """
 
 from abc import ABC as AbstractBaseClass, abstractmethod
@@ -10,30 +10,29 @@ from typing import TypeVar
 __date__ = "19/11/2023"
 __author__ = "Jack Taylor"
 
-KierefObjectType = TypeVar("KierefObjectType")
+KierefSourceType = TypeVar("KierefSourceType")
 
 
 @dataclass
 class KierefSourceGeneric(AbstractBaseClass):
     """
-    This abstract dataclass is a base object for creating references.
+    This abstract dataclass is a base object for creating sources.
     """
 
     title: str
     creator: str
     date: str
-    uuid: str
 
-    def __init__(self) -> None:
+    def __post_init__(self) -> None:
         """
-        This method initialises this object and creates a UUID.
+        This method creates an identity after initialisation.
         """
-        self.uuid = str(uuid4())
+        self.id = str(uuid4())
 
     @abstractmethod
     def reference(self) -> str:
         """
-        This abstract method returns a reference based on the object.
+        This abstract method returns a reference based on the source.
 
         :return: The source reference
         :rtype: str
@@ -42,7 +41,7 @@ class KierefSourceGeneric(AbstractBaseClass):
 
     def cite(self) -> str:
         """
-        This method returns a citation based on the object.
+        This method returns a citation based on the source.
 
         :return: The source citation
         :rtype: str
@@ -51,18 +50,19 @@ class KierefSourceGeneric(AbstractBaseClass):
 
     def __repr__(self) -> str:
         """
-        This method uses the object's reference() method to print its data.
+        This method uses the source class type and 'cite()' function to
+        represent its contents.
 
         :return: The reference of the object
         :rtype: str
         """
-        return self.reference()
+        return f"{self.__class__.__name__} {self.cite()}"
 
 
 @dataclass
 class KierefSourceElectronic(KierefSourceGeneric):
     """
-    This dataclass is an object for creating electronic source references.
+    This dataclass is an object for creating electronic sources.
     """
 
     style: str
@@ -78,7 +78,6 @@ class KierefSourceElectronic(KierefSourceGeneric):
         :return: The source reference
         :rtype: str
         """
-        # noinspection SpellCheckingInspection
         return (
             f"{self.creator}, {self.title}, {self.date} in: {self.site} ("
             f"{self.style} {self.url}), abgerufen am {self.accessed}, "
@@ -89,7 +88,7 @@ class KierefSourceElectronic(KierefSourceGeneric):
 @dataclass
 class KierefSourceArticle(KierefSourceGeneric):
     """
-    This dataclass is an object for creating article source references.
+    This dataclass is an object for creating article sources.
     """
 
     publisher: str
