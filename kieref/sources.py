@@ -10,7 +10,6 @@ from uuid import uuid4
 __date__ = "19/11/2023"
 __author__ = "Jack Taylor"
 
-
 KierefSourceType = TypeVar("KierefSourceType", bound="KierefSourceGeneric")
 
 
@@ -85,6 +84,13 @@ class KierefSourceElectronic(KierefSourceAbstract):
             f"{self.pages}."
         )
 
+    def __repr__(self) -> str:
+        """
+        This function uses the parent class' '__repr__()' function to represent
+        this source's data.
+        """
+        return super().__repr__()
+
 
 @dataclass
 class KierefSourceArticle(KierefSourceAbstract):
@@ -107,3 +113,10 @@ class KierefSourceArticle(KierefSourceAbstract):
             f"{self.creator}, article. {self.title}, in: {self.publisher} "
             f"{self.volume}, {self.date}, {self.pages} pages."
         )
+
+    def __repr__(self) -> str:
+        """
+        This function uses the parent class' '__repr__()' function to represent
+        this source's data.
+        """
+        return super().__repr__()
