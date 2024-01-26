@@ -17,7 +17,7 @@ class KierefManager:
     This class is an object for managing sources.
     """
 
-    def __init__(self, database: str) -> None:
+    def __init__(self, database: str = "kieref.dbm") -> None:
         """
         This method initialises this manager and enables it by default.
 
@@ -27,16 +27,16 @@ class KierefManager:
         self.enabled: bool = True
         self.database = database
 
-    def print_references(self) -> None:
+    def print_sources(self) -> None:
         """
         This method prints all sources in the database.
         """
-        references = self.get_references()
+        references = self.get_sources()
         print(f"Sources: {len(references)}")
         for source in references:
             print(source)
 
-    def get_references(self) -> list[KierefSourceAbstract]:
+    def get_sources(self) -> list[KierefSourceAbstract]:
         """
         This method returns all sources in the database.
         """
@@ -44,7 +44,7 @@ class KierefManager:
             values = list(database.values())
             return values
 
-    def add_reference(self, source: KierefSourceAbstract) -> None:
+    def add_source(self, source: KierefSourceAbstract) -> None:
         """
         This method adds a new source to the database.
 
@@ -54,7 +54,7 @@ class KierefManager:
         with open(self.database) as database:
             database[source.id] = source
 
-    def delete_reference(self, source: KierefSourceAbstract) -> None:
+    def delete_source(self, source: KierefSourceAbstract) -> None:
         """
         This method removes a source from the database.
 
@@ -64,7 +64,7 @@ class KierefManager:
         with open(self.database) as database:
             database.pop(source.id)
 
-    def create_reference(self, reference_type: type[KierefSourceType]) -> None:
+    def create_source(self, reference_type: type[KierefSourceType]) -> None:
         """
         This method creates a source object based on the 'reference_type'
         parameter.
@@ -75,5 +75,5 @@ class KierefManager:
         :rtype: KierefObjectType
         """
         new_reference = reference_type()
-        self.add_reference(new_reference)
+        self.add_source(new_reference)
         return new_reference
