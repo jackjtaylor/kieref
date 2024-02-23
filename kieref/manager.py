@@ -19,7 +19,7 @@ class KierefManager:
 
     def __init__(self, database: str = "kieref.dbm") -> None:
         """
-        This method initialises this manager and enables it by default.
+        This function initialises this manager and enables it by default.
 
         :param database: The database path
         :type database: str
@@ -29,16 +29,27 @@ class KierefManager:
 
     def print_sources(self) -> None:
         """
-        This method prints all sources in the database.
+        This function prints all sources in the database.
         """
         references = self.get_sources()
         print(f"Sources: {len(references)}")
-        for source in references:
-            print(source)
+        for index, source in enumerate(references):
+            print(f"{index + 1}: {source}")
+
+    def get_source(self, index: int) -> KierefSourceType:
+        """
+        This function returns a source based on the given index.
+        :param index: The index used
+        :type index: int
+        """
+        with open(self.database) as database:
+            keys = list(database.keys())
+            source_id = keys[index + 1]
+            return database[source_id]
 
     def get_sources(self) -> list[KierefSourceAbstract]:
         """
-        This method returns all sources in the database.
+        This function returns all sources in the database.
         """
         with open(self.database) as database:
             values = list(database.values())
@@ -46,7 +57,7 @@ class KierefManager:
 
     def add_source(self, source: KierefSourceAbstract) -> None:
         """
-        This method adds a new source to the database.
+        This function adds a new source to the database.
 
         :param source: The new source to add
         :type source: KierefSourceAbstract
@@ -56,7 +67,7 @@ class KierefManager:
 
     def delete_source(self, source: KierefSourceAbstract) -> None:
         """
-        This method removes a source from the database.
+        This function removes a source from the database.
 
         :param source: The source to delete
         :type source: KierefSourceAbstract
@@ -66,7 +77,7 @@ class KierefManager:
 
     def create_source(self, reference_type: type[KierefSourceType]) -> None:
         """
-        This method creates a source object based on the 'reference_type'
+        This function creates a source object based on the 'reference_type'
         parameter.
 
         :param reference_type: The type of reference to create
