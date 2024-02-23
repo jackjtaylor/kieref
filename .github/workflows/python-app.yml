@@ -25,4 +25,4 @@ jobs:
         pip install pyinstaller
     - name: create an executable file
       run: |
-        pyinstaller -n kieref-beta -p /kieref/* /kieref/cli.py
+        pyinstaller -n kieref-beta -p ./kieref/* ./kieref/cli.py
