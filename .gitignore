@@ -1,3 +1,5 @@
 /.venv
 *.pyc
-*.db
+*.dbm
+/.vscode
+/build
