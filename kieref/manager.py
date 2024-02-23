@@ -44,7 +44,7 @@ class KierefManager:
         """
         with open(self.database) as database:
             keys = list(database.keys())
-            source_id = keys[index + 1]
+            source_id = keys[index - 1]
             return database[source_id]
 
     def get_sources(self) -> list[KierefSourceAbstract]:
