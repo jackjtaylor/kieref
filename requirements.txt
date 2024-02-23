@@ -1,2 +1,2 @@
 dataclasses~=0.6
-click~=8.1.7
+click~=8.1.7w
