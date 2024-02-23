@@ -10,7 +10,7 @@ from uuid import uuid4
 __date__ = "19/11/2023"
 __author__ = "Jack Taylor"
 
-KierefSourceType = TypeVar("KierefSourceType", bound="KierefSourceGeneric")
+KierefSourceType = TypeVar("KierefSourceType", bound="KierefSourceAbstract")
 
 
 @dataclass
