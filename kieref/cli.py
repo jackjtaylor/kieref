@@ -1,8 +1,6 @@
 """
 This module is the text-based interface for Kieref.
 """
-from typing import Type
-
 from click import group, argument, echo, option
 from dataclasses import fields
 
@@ -15,7 +13,7 @@ __author__ = "Jack Taylor"
 manager = KierefManager()
 types: dict[str, KierefSourceType] = {
     "article": KierefSourceArticle,
-    "electronic": KierefSourceElectronic
+    "electronic": KierefSourceElectronic,
 }
 
 
@@ -45,6 +43,17 @@ def get(index: int) -> None:
     print(f"Source {index}:")
     print(f"Cite: {source.cite()}")
     print(f"Reference: {source.reference()}")
+
+
+@cli.command()
+@option("--index", prompt="What index do you want to delete?", type=int, required=True)
+def delete(index: int) -> None:
+    """
+    This function deletes a source based on its index.
+    """
+    source = manager.get_source(index)
+    manager.delete_source(source)
+    print("The source was deleted.")
 
 
 @cli.command()
