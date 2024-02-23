@@ -79,9 +79,8 @@ class KierefSourceElectronic(KierefSourceAbstract):
         :rtype: str
         """
         return (
-            f"{self.creator}, {self.title}, {self.date} in: {self.site} ("
-            f"{self.style} {self.url}), accessed on {self.accessed}, "
-            f"{self.pages}."
+            f"{self.creator}, {self.title}, {self.date} in: {self.site} ({self.style} {self.url}), "
+            f"accessed on {self.accessed}, {self.pages}."
         )
 
     def __repr__(self) -> str:
@@ -110,8 +109,8 @@ class KierefSourceArticle(KierefSourceAbstract):
         :rtype: str
         """
         return (
-            f"{self.creator}, article. {self.title}, in: {self.publisher} "
-            f"{self.volume}, {self.date}, {self.pages} pages."
+            f"{self.creator}, article. {self.title}, in: {self.publisher} {self.volume}, "
+            f"{self.date}, {self.pages} pages."
         )
 
     def __repr__(self) -> str:
